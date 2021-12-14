@@ -3,11 +3,16 @@ const app = express();
 const cors = require('cors');
 const Member = require('./models/member');
 
-app.get('/members', cors(), (_req, res) => {
-  Member.fetchAll()
-    .then(members => res.json({ error: false, data: members.toJSON() }))
-    .catch(error => console.error(error));
+app.get('/members', cors(), async (_req, res) => {
+  try {
+    const membersWithSubscriptionDetails = await Member.fetchAll({withRelated: ['subscription']})
+    return res.json({error: false, data: membersWithSubscriptionDetails.toJSON()})
+
+  } catch (err) {
+    return res.status(500).json({error: true, error: err})
+  }
 });
+
 
 const port = process.env.PORT || 3000;
 
