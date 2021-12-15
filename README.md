@@ -1,4 +1,4 @@
-# Code Test: Node - PART 1 COMPLETED BY JAE PARK
+# Code Test: Node - Completed by Jae Park
 
 A simple Express app designed to provide a basic API for our code test.
 
